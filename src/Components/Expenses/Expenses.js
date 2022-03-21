@@ -1,8 +1,11 @@
+// This page to display content and call components
+
 import ExpenseList from "./ExpensesList";
 import "./Expenses.css";
 import Card from "../UI/Card";
 import ExpenseFilter from "./ExpensesFilter";
 import React, { useState } from "react";
+import ExpenseChart from "./ExpensesChart";
 
 function Expenses(props) {
   const [filteredYear, setFilteredYear] = useState("2020");
@@ -11,7 +14,7 @@ function Expenses(props) {
     setFilteredYear(selectedYear);
   };
 
-  const filteredExpense = props.items.filter((expense) => {
+  const filteredExpenses = props.items.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
@@ -21,7 +24,8 @@ function Expenses(props) {
         selected={filteredYear}
         onChangeFilter={filterChangehandler}
       />
-      <ExpenseList items={filteredExpense} />
+      <ExpenseChart expenses={filteredExpenses} />
+      <ExpenseList items={filteredExpenses} />
     </Card>
   );
 }
